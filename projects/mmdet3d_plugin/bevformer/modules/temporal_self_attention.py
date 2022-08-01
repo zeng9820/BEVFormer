@@ -4,8 +4,8 @@
 #  Modified by Zhiqi Li
 # ---------------------------------------------
 
-from projects.mmdet3d_plugin.models.utils.bricks import run_time
-from .multi_scale_deformable_attn_function import MultiScaleDeformableAttnFunction_fp32
+#from projects.mmdet3d_plugin.models.utils.bricks import run_time
+from multi_scale_deformable_attn_function import MultiScaleDeformableAttnFunction_fp32
 from mmcv.ops.multi_scale_deform_attn import multi_scale_deformable_attn_pytorch
 import warnings
 import torch
@@ -270,3 +270,8 @@ class TemporalSelfAttention(BaseModule):
             output = output.permute(1, 0, 2)
 
         return self.dropout(output) + identity
+if __name__=="__main__":
+    m = TemporalSelfAttention()
+    query = torch.randn((900,1,256))
+    output = m(query)
+    print(output)
